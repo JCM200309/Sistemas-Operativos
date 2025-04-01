@@ -27,12 +27,12 @@ void signal3_handler_padre(int sig){
         printf("Mi numero de pid es: %i", getpid());
         ping++; 
         //Le mando la señal al hijo y lo duermo
-        kill(pid_hijo,SIGUSR1);
+        kill(getppid(),34);
         dormir();
     }
     else{
         //Salgo porque no quiero imprimir mas ping
-        exit(0);
+        return;
     } 
 }
 
@@ -42,11 +42,11 @@ void signal3_handler_hijo(int sig){
         printf("Mi numero de pid es: %i \n", getpid());
         pong++;
         //Le mando la señal al padre y lo duermo
-        kill(getppid(),SIGUSR1);
+        kill(pid_hijo,34);
         dormir();
     }else{
         //Salgo porque no quiero imprimir mas pong
-        exit(0);
+        return;
     }
 }
 
@@ -57,7 +57,9 @@ int main(){
     printf("Mi numero de pid es: %i \n", getpid());
     ping = 1;
     pong = 0;
+    signal(34,signal3_handler_hijo);
     pid_hijo = fork();
+    
     
     
     //Tendria que establecer señales y handlers para asi enviar y recibir señales entre procesos
@@ -67,28 +69,30 @@ int main(){
 
     if(pid_hijo != 0){
         //Linkeo una señal al padre
-        signal(SIGUSR1,signal3_handler_hijo);
+        
 
         dormir();
+        exit(0);
     
     }else{
         //Soy el hijo
 
         //Linkeo una señal al hijo
-        signal(SIGUSR1,signal3_handler_padre);
+        signal(34,signal3_handler_padre);
 
 
         printf("Pong \n");
         printf("Mi numero de pid es: %i \n", getpid());
         
-        pong = 0;
+        pong++;
 
         //Ahora tendria que mandar una señal al padre para despertarlo
         
         //Hijo envia señal al padre
-        kill(getppid(),SIGUSR1);
+        kill(getppid(),34);
         dormir();
+        exit(0);
     }
 
-    return 0;
+    exit(0);
 }
