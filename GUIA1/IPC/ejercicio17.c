@@ -23,6 +23,10 @@ void ejecutarNieto(int pipe_hijo[],int numero_padre){
 
 void ejecutarHijo (int n, int i, int pipes[][2]) {
     
+    //Como quiero enviarle el numero al nieto para que pueda calcular el numero voy a leer del padre el numero que me envio
+    int numero_padre;
+    read(pipes[i][READ],&numero_padre,sizeof(numero_padre));
+    
     //Creo el subproceso nieto que tendra que calcular 
     int pid_nieto = fork();
 
@@ -30,12 +34,11 @@ void ejecutarHijo (int n, int i, int pipes[][2]) {
     int pipe_hijo[2];
     pipe(pipe_hijo);
 
-    //Como quiero enviarle el numero al nieto para que pueda calcular el numero voy a leer del padre el numero que me envio
-    int numero_padre;
-    read(pipes[i][READ],&numero_padre,sizeof(numero_padre));
+    
 
     
     if(pid_nieto == 0){
+        //Preguntar si se puede pasar numero_padre o si hay que pasarlo por un pipe por el tema de que los PROCESOS NO COMPARTEN MEMORIA
         ejecutarNieto(pipe_hijo,numero_padre);
     }
     else{
@@ -47,6 +50,7 @@ void ejecutarHijo (int n, int i, int pipes[][2]) {
         read(pipe_hijo[READ],rta_nieto,sizeof(rta_nieto));
 
         //Ahora en teoria el hijo tendria que notificar al padre que ya termino, por lo tanto tendra que escribir en el segundo pipe del hijo i
+        write(pipes[n+i][WRITE],&i,sizeof(i));
         write(pipes[n+i][WRITE], &rta_nieto,sizeof(rta_nieto));
     }
     exit(EXIT_SUCCESS);
