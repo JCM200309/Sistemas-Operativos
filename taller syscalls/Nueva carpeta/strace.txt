@@ -1,0 +1,67 @@
+tallerso@taller-so:~/taller-syscalls$ strace ./hai ls
+execve("./hai", ["./hai", "ls"], 0x7fffc8dd76d8 /* 22 vars */) = 0
+uname({sysname="Linux", nodename="taller-so", ...}) = 0
+brk(NULL)                               = 0x180e000
+brk(0x180f1c0)                          = 0x180f1c0
+arch_prctl(ARCH_SET_FS, 0x180e880)      = 0
+readlink("/proc/self/exe", "/home/tallerso/taller-syscalls/h"..., 4096) = 34
+brk(0x18301c0)                          = 0x18301c0
+brk(0x1831000)                          = 0x1831000
+access("/etc/ld.so.nohwcap", F_OK)      = -1 ENOENT (No such file or directory)
+clone(child_stack=NULL, flags=CLONE_CHILD_CLEARTID|CLONE_CHILD_SETTID|SIGCHLD, child_tidptr=0x180eb50) = 1236
+rt_sigaction(SIGINT, {sa_handler=0x40108e, sa_mask=[INT], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x406bf0}, {sa_handler=SIG_DFL, sa_mask=[], sa_flags=0}, 8) = 0
+rt_sigprocmask(SIG_BLOCK, [CHLD], [], 8) = 0
+rt_sigaction(SIGCHLD, NULL, {sa_handler=SIG_DFL, sa_mask=[], sa_flags=0}, 8) = 0
+rt_sigprocmask(SIG_SETMASK, [], NULL, 8) = 0
+nanosleep({tv_sec=1, tv_nsec=0}, 0x7ffea379a180) = 0
+write(1, "sup!\n", 5sup!
+)                   = 5
+kill(1236, SIGURG)                      = 0
+rt_sigprocmask(SIG_BLOCK, [CHLD], [], 8) = 0
+rt_sigaction(SIGCHLD, NULL, {sa_handler=SIG_DFL, sa_mask=[], sa_flags=0}, 8) = 0
+rt_sigprocmask(SIG_SETMASK, [], NULL, 8) = 0
+nanosleep({tv_sec=1, tv_nsec=0}, ya va!
+0x7ffea379a180) = 0
+write(1, "sup!\n", 5sup!
+)                   = 5
+kill(1236, SIGURG)                      = 0
+rt_sigprocmask(SIG_BLOCK, [CHLD], [], 8) = 0
+rt_sigaction(SIGCHLD, NULL, {sa_handler=SIG_DFL, sa_mask=[], sa_flags=0}, 8) = 0
+rt_sigprocmask(SIG_SETMASK, [], NULL, 8) = 0
+nanosleep({tv_sec=1, tv_nsec=0}, ya va!
+{tv_sec=0, tv_nsec=188654367}) = ? ERESTART_RESTARTBLOCK (Interrupted by signal)
+--- SIGWINCH {si_signo=SIGWINCH, si_code=SI_KERNEL} ---
+restart_syscall(<... resuming interrupted nanosleep ...>) = ? ERESTART_RESTARTBLOCK (Interrupted by signal)
+--- SIGWINCH {si_signo=SIGWINCH, si_code=SI_KERNEL} ---
+restart_syscall(<... resuming interrupted restart_syscall ...>) = 0
+write(1, "sup!\n", 5sup!
+)                   = 5
+kill(1236, SIGURG)                      = 0
+rt_sigprocmask(SIG_BLOCK, [CHLD], [], 8) = 0
+rt_sigaction(SIGCHLD, NULL, {sa_handler=SIG_DFL, sa_mask=[], sa_flags=0}, 8) = 0
+rt_sigprocmask(SIG_SETMASK, [], NULL, 8) = 0
+nanosleep({tv_sec=1, tv_nsec=0}, ya va!
+0x7ffea379a180) = 0
+write(1, "sup!\n", 5sup!
+)                   = 5
+kill(1236, SIGURG)                      = 0
+rt_sigprocmask(SIG_BLOCK, [CHLD], [], 8) = 0
+rt_sigaction(SIGCHLD, NULL, {sa_handler=SIG_DFL, sa_mask=[], sa_flags=0}, 8) = 0
+rt_sigprocmask(SIG_SETMASK, [], NULL, 8) = 0
+nanosleep({tv_sec=1, tv_nsec=0}, ya va!
+0x7ffea379a180) = 0
+write(1, "sup!\n", 5sup!
+)                   = 5
+kill(1236, SIGURG)                      = 0
+rt_sigprocmask(SIG_BLOCK, [CHLD], [], 8) = 0
+rt_sigaction(SIGCHLD, NULL, {sa_handler=SIG_DFL, sa_mask=[], sa_flags=0}, 8) = 0
+rt_sigprocmask(SIG_SETMASK, [], NULL, 8) = 0
+nanosleep({tv_sec=1, tv_nsec=0}, ya va!
+hai  src
+{tv_sec=0, tv_nsec=990758584}) = ? ERESTART_RESTARTBLOCK (Interrupted by signal)
+--- SIGINT {si_signo=SIGINT, si_code=SI_USER, si_pid=1236, si_uid=1001} ---
+--- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=1236, si_uid=1001, si_status=0, si_utime=216 /* 2.16 s */, si_stime=5 /* 0.05 s */} ---
+wait4(-1, [{WIFEXITED(s) && WEXITSTATUS(s) == 0}], 0, NULL) = 1236
+exit_group(0)                           = ?
++++ exited with 0 +++
+

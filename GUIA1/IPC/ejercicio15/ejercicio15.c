@@ -42,6 +42,7 @@ int main() {
 
   	//Creo el pipe
 	int pipe_fd[2]; // [0] = lectura, [1] = escritura
+	pipe(pipe_fd);
 
 	pid_t pid_hijo1 = fork();
 
@@ -58,6 +59,11 @@ int main() {
 			proceso_wc(pipe_fd);
 		}
 	}
+
+	//Hay que cerrar el pipe
+	close(pipe_fd[READ]);
+    close(pipe_fd[WRITE]);
+
 	wait(NULL);
 	wait(NULL);
 	exit(EXIT_SUCCESS);
