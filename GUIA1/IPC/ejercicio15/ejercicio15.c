@@ -13,9 +13,8 @@ void proceso_wc(int pipe_fd[]) {
 
 	dup2(pipe_fd[READ],STDIN_FILENO);
 
-	//Ahora voy a buscar leer el pipe
-	char buffer[100];
-	read(pipe_fd[0],buffer,sizeof(buffer));	
+	//No voy a tener que leer ya que al mandar end of file 
+	
 	execlp("wc", "wc", "-l", NULL);
 	exit(EXIT_SUCCESS);
 }
