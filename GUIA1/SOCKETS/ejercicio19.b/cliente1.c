@@ -24,7 +24,7 @@ int main() {
     int num;
     while(1){
         read(server_socket,&num,sizeof(num));
-        nu++;
+        num++;
         //Escribe es igual a usar send
         write(server_socket, &num, sizeof(num));
         
